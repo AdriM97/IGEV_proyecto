@@ -1,0 +1,16 @@
+{
+	Madrid: [30,0,-70],
+	CastillaLeon: [-20,0,-150],
+	Galicia: [-150,0,-250],
+	Asturias: [-70,0,-260],
+	Cantabria: [10,0,-240],
+	Navarra: [130,0,220],
+	Aragon: [190,0,-130],
+	Baleares: [350,0,-20],
+	Valencia: [190,0,0],
+	CastillaMancha: [80,0,0],
+	Extremadura: [-70,0,0],
+	Andalucia: [-20,0,150],
+	Murcia: [150,0,100],
+	Canarias: [-250,0,-250]					
+};

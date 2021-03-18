@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Accidentes Tráfico</title>
+	<!-- <link rel="stylesheet"
+		  href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+		  integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+		  crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="mi_estilo.css" />
+	<script src="libs/jquery.js"></script>
+	<script src="libs/Chart.js"></script>
+	<script src="js/mapa.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/config.js"></script>
+</head>
+
+<body>
+	<div class="titulo">
+		<h1>Visualización de histórico de accidentes </h1>
+	</div>
+	<div>
+	<img id="imgOri" src="spain-03.png" width="892" height="632" style="display:none">
+	<div class='row'>
+		<div class="div_form">
+			<form id="formulario", onsubmit="return false">
+			    <div id='datos'><fieldset>
+			       <legend>Datos a visualizar</legend>
+			       <input type="checkbox" name="datos" value="infracciones">Infracciones<br>
+			       <input type="checkbox" name="datos" value="ac_mortales" checked>Accidentes mortales<br>
+			       <input type="checkbox" name="datos" value="ac_victima" checked>Accidentes con victima<br>
+			    </div></fieldset>
+			    <div id='normal'><fieldset>
+			       <legend>Normalizacion respecto</legend>
+			       <input type="radio" name="norm" value="sn">Sin normalizar<br>
+			       <!-- <input type="radio" name="norm" value="licencias">Número de licencias<br>
+			       <input type="radio" name="norm" value="vehículos">Número de vehículos<br> -->
+			       <input type="radio" name="norm" value="total" checked>Total nacional<br>
+			    </div></fieldset>
+			    <div id='anio'><fieldset>
+			       <legend>Año</legend>
+			       <select id="anio" form="formulario">
+			           <option value="2002">2002</option>
+			           <option value="2003">2003</option>
+			           <option value="2004">2004</option>
+			           <option value="2005">2005</option>
+			           <option value="2006">2006</option>
+			           <option value="2007">2007</option>
+			           <option value="2008">2008</option>
+			           <option value="2009">2009</option>
+			           <option value="2010">2010</option>
+			           <option value="2011">2011</option>
+			           <option value="2012">2012</option>
+			           <option value="2013">2013</option>
+			           <option value="2014">2014</option>
+			           <option value="2015">2015</option>
+			           <option value="2016">2016</option>
+			           <option value="2017">2017</option>
+			           <option value="2018">2018</option>
+			           <option value="2019" selected="selected">2019</option>
+			       </select>
+			   </div id="seleccionarccaa"></fieldset>
+					<div id='normal'><fieldset>
+					<button id='boton_ccaa' onclick="despelgar_ccaa()">Desplegar CCAA</button>
+					  <div id=comunidades_visual_form style="display:none;"><div id="sustituirccaa"/></div>
+					</div></fieldset>
+				</div>
+			    <input type="submit" value="Pintar" />
+			</form>
+		</div>
+
+		<div class="representacion">
+			<div class ="anio_visual">
+				<h2 id="anio_visual">2019</h2>
+			</div>
+		<div class="row">
+			<div class="mapa3d">
+				<div id="contMeshMap" class="contMeshMap"></div>
+				<div class="leyenda3d">
+					<table>
+						  <tr>
+							<th><p style="color:orange;">Infracciones</p></th>
+							<th><p style="color:red;">Accidentes con víctima</p></th>
+							<th><p>Accidentes mortales</p></th>
+						  </tr>
+					</table>
+				</div>
+			</div>
+			<div class="contentchart">
+				<div class="chartclass", id="barchart"></div>
+				<div class="divline">
+					<div class="tags" id="tags">
+						<button class="btnTag" id="btninfracciones"  onclick="cambia_tag('infracciones')">Infracciones</button>
+						<button class="btnTag" id="btnac_mortales" onclick="cambia_tag('ac_mortales')">Accidentes mortales</button>
+						<button class="btnTag" id="btnac_victima"  onclick="cambia_tag('ac_victima')">Accidentes con victima</button>
+						<button class="btnTag" id="btnSelec"  onclick="cambia_tag(0)">Seleccionar CCAA</button>
+					</div>
+
+					<div id='ccaa_vision'><fieldset>
+						<legend>CCAA</legend><div>
+							<div id="ccaa_reemplaza"></div>
+						</div></div>
+				</div></fieldset>
+				<div class="linechartclass", id="linechart"></div>
+				</div>
+
+			</div>
+
+
+		</div>
+	  	</div>
+
+	</div>
+
+	<script type="text/javascript">
+	var TR3clon;
+		function initMap(){
+			var imgOriObj = document.getElementById('imgOri');
+			TR3.setMeshMap(imgOriObj,'contMeshMap');
+			init();
+		};
+
+		$(function() {
+			$("form").submit(function(e) {
+			    e.preventDefault();
+				$('#barchart').empty();
+				$('#linechart').empty();
+				$('#contMeshMap').empty();
+				var imgOriObj = document.getElementById('imgOri');
+
+				TR3.setMeshMap(imgOriObj,'contMeshMap');
+			    init()
+			});
+		});
+
+
+	</script>
+	</body>
+
+<script type="text/javascript">
+	do_onload();
+	$(document).ready(initMap)
+</script>
+</html>
